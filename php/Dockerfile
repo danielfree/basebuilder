@@ -3,7 +3,12 @@
 # 1- install docker
 # 2- run: $ docker build -no-cache -t tsuru/php https://github.com/tsuru/basebuilder/master/php/Dockerfile
 
-from    ubuntu:14.04
+from    docker.cn/docker/ubuntu:14.04
+run echo "deb http://mirrors.sohu.com/ubuntu/ trusty main restricted universe multiverse" > /etc/apt/sources.list
+run echo "deb http://mirrors.sohu.com/ubuntu/ trusty-security main restricted universe multiverse" >> /etc/apt/sources.list
+run echo "deb http://mirrors.sohu.com/ubuntu/ trusty-updates main restricted universe multiverse" >> /etc/apt/sources.list
+run echo "deb http://mirrors.sohu.com/ubuntu/ trusty-proposed main restricted universe multiverse" >> /etc/apt/sources.list
+run echo "deb http://mirrors.sohu.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list
 run	apt-get update
 run	apt-get install wget php5-cli -y --force-yes
 run	mkdir /var/lib/tsuru
