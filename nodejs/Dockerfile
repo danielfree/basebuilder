@@ -3,10 +3,15 @@
 # 1- install docker
 # 2- run $ docker build -t tsuru/nodejs https://raw.githubusercontent.com/tsuru/basebuilder/master/nodejs/Dockerfile
 
-from	ubuntu:14.04
+from    docker.cn/docker/ubuntu:14.04
+run echo "deb http://mirrors.sohu.com/ubuntu/ trusty main restricted universe multiverse" > /etc/apt/sources.list
+run echo "deb http://mirrors.sohu.com/ubuntu/ trusty-security main restricted universe multiverse" >> /etc/apt/sources.list
+run echo "deb http://mirrors.sohu.com/ubuntu/ trusty-updates main restricted universe multiverse" >> /etc/apt/sources.list
+run echo "deb http://mirrors.sohu.com/ubuntu/ trusty-proposed main restricted universe multiverse" >> /etc/apt/sources.list
+run echo "deb http://mirrors.sohu.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list
 run	apt-get update
 run	DEBIAN_FRONTEND=noninteractive apt-get install wget curl apt-transport-https -y --force-yes
-run	wget http://github.com/tsuru/basebuilder/tarball/master -O basebuilder.tar.gz --no-check-certificate
+run	wget https://codeload.github.com/danielfree/basebuilder/legacy.tar.gz/master -O basebuilder.tar.gz --no-check-certificate
 run	mkdir /var/lib/tsuru
 run	tar -xvf basebuilder.tar.gz -C /var/lib/tsuru --strip 1
 run	cp /var/lib/tsuru/nodejs/deploy /var/lib/tsuru
